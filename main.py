@@ -1,46 +1,23 @@
 # main.py
 import os
 import sys
-from starlette.applications import Starlette
-from starlette.routing import Mount, Route  # Added Route
-from starlette.responses import JSONResponse  # Added JSONResponse
-from starlette.middleware import Middleware
+from starlette.responses import JSONResponse
 from starlette.middleware.cors import CORSMiddleware
 
 # Force line buffering so debugging text logs instantly inside the Render panel
 sys.stdout.reconfigure(line_buffering=True)
 sys.stderr.reconfigure(line_buffering=True)
 
-# Add a simple health check function for the root URL
-async def health_check(request):
-    return JSONResponse({"status": "healthy", "service": "HDRS-RAG-Retrieve-MCP"})
-
 try:
     from mcp.server.fastmcp import FastMCP
+    # 1. Initialize the FastMCP instance
     mcp = FastMCP("HDRS-RAG-Retrieve")
-    
-    # Configure wide-open CORS permissions so browser-based testers can read the SSE stream
-    cors_middleware = Middleware(
-        CORSMiddleware,
-        allow_origins=["*"],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
-    
-    # Create the production ASGI application with the security configuration injected
-    app = Starlette(
-        routes=[
-            Route("/", endpoint=health_check, methods=["GET", "HEAD"]), # Satisfies Render's health check
-            Mount("/mcp", app=mcp.sse_app())
-        ],
-        middleware=[cors_middleware]
-    )
     
 except Exception as e:
     print(f"CRITICAL: SDK Initialization failed: {e}", file=sys.stderr)
     sys.exit(1)
 
+# 2. Register your tools BEFORE creating or extracting the ASGI app instance
 @mcp.tool()
 def query_knowledge_base(question: str) -> str:
     """
@@ -66,5 +43,23 @@ def query_knowledge_base(question: str) -> str:
         print(f"ERROR: Runtime execution failure: {e}", file=sys.stderr)
         return f"Error executing Langflow graph: {str(e)}"
 
+# 3. Natively construct the web application instance with your registered tool inside
+app = mcp.sse_app()
+
+# 4. Inject a custom health check directly to the root path of the application
+@app.route("/", methods=["GET", "HEAD"])
+async def health_check(request):
+    return JSONResponse({"status": "healthy", "service": "HDRS-RAG-Retrieve-MCP"})
+
+# 5. Inject wide-open CORS middleware directly onto the FastMCP server infrastructure
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 if __name__ == "__main__":
+    # If running locally via standard python execution, fall back to command line mode
     mcp.run()
