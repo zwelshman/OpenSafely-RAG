@@ -2,13 +2,17 @@
 import os
 import sys
 
-# Force stdout/stderr flushing so errors display instantly in your Render logs
 sys.stdout.reconfigure(line_buffering=True)
 sys.stderr.reconfigure(line_buffering=True)
 
 try:
     from mcp.server.fastmcp import FastMCP
     mcp = FastMCP("HDRS-RAG-Retrieve")
+    
+    # CRITICAL: Expose the FastMCP standard ASGI web application layer 
+    # so external web server engines can track and run it over an HTTP socket loop.
+    app = mcp.asgi_app
+    
 except Exception as e:
     print(f"CRITICAL: SDK Initialization failed: {e}", file=sys.stderr)
     sys.exit(1)
@@ -39,7 +43,5 @@ def query_knowledge_base(question: str) -> str:
         return f"Error executing Langflow graph: {str(e)}"
 
 if __name__ == "__main__":
-    try:
-        mcp.run()
-    except Exception as e:
-        print(f"CRITICAL: Runtime engine crashed: {e}", file=sys.stderr)
+    # Fallback execution track for local testing environments
+    mcp.run()
