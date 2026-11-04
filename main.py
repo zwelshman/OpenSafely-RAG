@@ -4,13 +4,19 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 from mcp.server.fastmcp import FastMCP
+from mcp.server.transport_security import TransportSecuritySettings
 
 # Force line buffering so debugging text logs instantly inside the Render panel
 sys.stdout.reconfigure(line_buffering=True)
 sys.stderr.reconfigure(line_buffering=True)
 
-# 1. Initialize FastMCP and register your RAG tool workflow
-mcp = FastMCP("HDRS-RAG-Retrieve")
+# 1. Initialize FastMCP with DNS rebinding protection disabled for remote cloud deployment
+mcp = FastMCP(
+    "HDRS-RAG-Retrieve",
+    transport_security=TransportSecuritySettings(
+        enable_dns_rebinding_protection=False
+    )
+)
 
 @mcp.tool()
 def query_knowledge_base(question: str) -> str:
@@ -37,14 +43,13 @@ def query_knowledge_base(question: str) -> str:
         print(f"ERROR: Runtime execution failure: {e}", file=sys.stderr)
         return f"Error executing Langflow graph: {str(e)}"
 
-# 2. Create a clean, standard FastAPI application
+# 2. Create standard FastAPI application
 app = FastAPI()
 
 # 3. Trust Render's reverse proxy headers
-# This prevents the 421 error by forcing the app to generate 'https://' URLs instead of 'http://'
 app.add_middleware(ProxyHeadersMiddleware, trusted_hosts="*")
 
-# 4. Add wide-open CORS security context
+# 4. Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -53,13 +58,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 5. Bind a native root endpoint to fulfill Render's platform monitoring health check
+# 5. Health check endpoint for Render monitoring
 @app.get("/")
 async def health_check():
     return {"status": "healthy", "service": "HDRS-RAG-Retrieve-MCP"}
 
-# 6. Mount the FastMCP SSE application safely under /mcp
-app.mount("/mcp", mcp.sse_app())
+# 6. Mount the FastMCP SSE application under /mcp
+app.mount(
+    "/mcp",
+    mcp.sse_app(
+        transport_security=TransportSecuritySettings(
+            enable_dns_rebinding_protection=False
+        )
+    )
+)
 
 if __name__ == "__main__":
     mcp.run()
