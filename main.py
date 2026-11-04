@@ -2,13 +2,18 @@
 import os
 import sys
 from starlette.applications import Starlette
-from starlette.routing import Mount
+from starlette.routing import Mount, Route  # Added Route
+from starlette.responses import JSONResponse  # Added JSONResponse
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
 
 # Force line buffering so debugging text logs instantly inside the Render panel
 sys.stdout.reconfigure(line_buffering=True)
 sys.stderr.reconfigure(line_buffering=True)
+
+# Add a simple health check function for the root URL
+async def health_check(request):
+    return JSONResponse({"status": "healthy", "service": "HDRS-RAG-Retrieve-MCP"})
 
 try:
     from mcp.server.fastmcp import FastMCP
@@ -26,6 +31,7 @@ try:
     # Create the production ASGI application with the security configuration injected
     app = Starlette(
         routes=[
+            Route("/", endpoint=health_check, methods=["GET", "HEAD"]), # Satisfies Render's health check
             Mount("/mcp", app=mcp.sse_app())
         ],
         middleware=[cors_middleware]
