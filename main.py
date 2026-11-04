@@ -3,6 +3,8 @@ import os
 import sys
 from starlette.applications import Starlette
 from starlette.routing import Mount
+from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
 
 # Force line buffering so debugging text logs instantly inside the Render panel
 sys.stdout.reconfigure(line_buffering=True)
@@ -12,12 +14,21 @@ try:
     from mcp.server.fastmcp import FastMCP
     mcp = FastMCP("HDRS-RAG-Retrieve")
     
-    # Create a production ASGI endpoint layer
-    # FastMCP servers expose a .sse_app() hook to route network events
+    # Configure wide-open CORS permissions so browser-based testers can read the SSE stream
+    cors_middleware = Middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+    
+    # Create the production ASGI application with the security configuration injected
     app = Starlette(
         routes=[
             Mount("/mcp", app=mcp.sse_app())
-        ]
+        ],
+        middleware=[cors_middleware]
     )
     
 except Exception as e:
