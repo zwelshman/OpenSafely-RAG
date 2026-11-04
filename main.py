@@ -50,9 +50,11 @@ app.add_middleware(
 )
 
 # 4. Bind a native root endpoint to fulfill Render's platform monitoring health check requirements
-@app.route("/")
 async def health_check(request):
     return JSONResponse({"status": "healthy", "service": "HDRS-RAG-Retrieve-MCP"})
+
+# Explicitly register the route directly to the router to avoid missing decorators
+app.router.add_route("/", health_check)
 
 if __name__ == "__main__":
     mcp.run()
