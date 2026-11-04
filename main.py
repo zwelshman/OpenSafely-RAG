@@ -1,6 +1,6 @@
 import os
 import sys
-from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from mcp.server.fastmcp import FastMCP
 
@@ -50,9 +50,9 @@ app.add_middleware(
 )
 
 # 4. Bind a native root endpoint to fulfill Render's platform monitoring health check requirements
-@app.get("/")
-async def health_check():
-    return {"status": "healthy", "service": "HDRS-RAG-Retrieve-MCP"}
+@app.route("/")
+async def health_check(request):
+    return JSONResponse({"status": "healthy", "service": "HDRS-RAG-Retrieve-MCP"})
 
 if __name__ == "__main__":
     mcp.run()
