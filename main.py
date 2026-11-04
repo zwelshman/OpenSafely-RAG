@@ -9,9 +9,8 @@ try:
     from mcp.server.fastmcp import FastMCP
     mcp = FastMCP("HDRS-RAG-Retrieve")
     
-    # CRITICAL: Expose the FastMCP standard ASGI web application layer 
-    # so external web server engines can track and run it over an HTTP socket loop.
-    app = mcp.asgi_app
+    # FIX: In v1 FastMCP, the underlying ASGI instance lives on .app, not .asgi_app
+    app = mcp.app
     
 except Exception as e:
     print(f"CRITICAL: SDK Initialization failed: {e}", file=sys.stderr)
@@ -43,5 +42,4 @@ def query_knowledge_base(question: str) -> str:
         return f"Error executing Langflow graph: {str(e)}"
 
 if __name__ == "__main__":
-    # Fallback execution track for local testing environments
     mcp.run()
