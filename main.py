@@ -1,7 +1,8 @@
 import os
 import sys
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 from mcp.server.fastmcp import FastMCP
 
 # Force line buffering so debugging text logs instantly inside the Render panel
@@ -36,11 +37,14 @@ def query_knowledge_base(question: str) -> str:
         print(f"ERROR: Runtime execution failure: {e}", file=sys.stderr)
         return f"Error executing Langflow graph: {str(e)}"
 
-# 2. Extract the native underlying web application structure (FastAPI/Starlette wrapper)
-# This hooks up all internal protocol paths (/sse, /messages) correctly at the root level.
-app = mcp.sse_app()
+# 2. Create a clean, standard FastAPI application
+app = FastAPI()
 
-# 3. Add wide-open CORS security context so external browser test suites can read the SSE stream
+# 3. Trust Render's reverse proxy headers
+# This prevents the 421 error by forcing the app to generate 'https://' URLs instead of 'http://'
+app.add_middleware(ProxyHeadersMiddleware, trusted_hosts="*")
+
+# 4. Add wide-open CORS security context
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -49,12 +53,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 4. Bind a native root endpoint to fulfill Render's platform monitoring health check requirements
-async def health_check(request):
-    return JSONResponse({"status": "healthy", "service": "HDRS-RAG-Retrieve-MCP"})
+# 5. Bind a native root endpoint to fulfill Render's platform monitoring health check
+@app.get("/")
+async def health_check():
+    return {"status": "healthy", "service": "HDRS-RAG-Retrieve-MCP"}
 
-# Explicitly register the route directly to the router to avoid missing decorators
-app.router.add_route("/", health_check)
+# 6. Mount the FastMCP SSE application safely under /mcp
+app.mount("/mcp", mcp.sse_app())
 
 if __name__ == "__main__":
     mcp.run()
