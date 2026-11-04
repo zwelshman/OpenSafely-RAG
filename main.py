@@ -1,23 +1,26 @@
 import os
 import sys
+import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 from mcp.server.fastmcp import FastMCP
 from mcp.server.transport_security import TransportSecuritySettings
 
-# Force line buffering so debugging text logs instantly inside the Render panel
+# Force line buffering so execution logs print instantly in cloud control panels
 sys.stdout.reconfigure(line_buffering=True)
 sys.stderr.reconfigure(line_buffering=True)
 
-# 1. Initialize FastMCP with DNS rebinding protection disabled for remote cloud deployment
+# 1. Initialize FastMCP with transport security configured for cloud hosting
 mcp = FastMCP(
     "HDRS-RAG-Retrieve",
     transport_security=TransportSecuritySettings(
-        enable_dns_rebinding_protection=False
+        enable_dns_rebinding_protection=False,
+        allowed_hosts=["*"]
     )
 )
 
+# 2. Register MCP Tool
 @mcp.tool()
 def query_knowledge_base(question: str) -> str:
     """
@@ -43,13 +46,14 @@ def query_knowledge_base(question: str) -> str:
         print(f"ERROR: Runtime execution failure: {e}", file=sys.stderr)
         return f"Error executing Langflow graph: {str(e)}"
 
-# 2. Create standard FastAPI application
-app = FastAPI()
+# 3. Create standard FastAPI application
+app = FastAPI(
+    title="HDRS RAG MCP Server",
+    description="Model Context Protocol (MCP) server delivering Astra DB RAG capabilities via Langflow."
+)
 
-# 3. Trust Render's reverse proxy headers
+# 4. Attach production middleware (Proxy headers for SSL/Host resolution & CORS)
 app.add_middleware(ProxyHeadersMiddleware, trusted_hosts="*")
-
-# 4. Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -58,20 +62,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 5. Health check endpoint for Render monitoring
+# 5. Platform health check endpoint
 @app.get("/")
 async def health_check():
-    return {"status": "healthy", "service": "HDRS-RAG-Retrieve-MCP"}
+    return {
+        "status": "healthy",
+        "service": "HDRS-RAG-Retrieve-MCP",
+        "sse_endpoint": "/mcp/sse"
+    }
 
-# 6. Mount the FastMCP SSE application under /mcp
-app.mount(
-    "/mcp",
-    mcp.sse_app(
-        transport_security=TransportSecuritySettings(
-            enable_dns_rebinding_protection=False
-        )
-    )
-)
+# 6. Mount the FastMCP SSE application under /mcp namespace
+app.mount("/mcp", mcp.sse_app())
 
 if __name__ == "__main__":
-    mcp.run()
+    port = int(os.environ.get("PORT", 10000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
