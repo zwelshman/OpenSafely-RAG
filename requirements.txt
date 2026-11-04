@@ -1,0 +1,4 @@
+mcp>=2.0.0
+langflow>=1.13.0
+langchain-astradb>=1.0.0
+astrapy>=2.3.2
