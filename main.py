@@ -32,10 +32,22 @@ def query_knowledge_base(question: str) -> str:
         if not os.path.exists("flow.json"):
             return "Error: flow.json layout configuration file is missing from the server root directory."
 
+        # Explicitly map Render system variables directly into the graph component configurations
+        tweaks = {
+            "ext:openrouter:OpenRouterComponent@official-Lbbp3": {
+                "api_key": os.environ.get("OPENROUTER_API_KEY", "")
+            },
+            "ext:datastax:AstraDBVectorStoreComponent@official-zF58p": {
+                "token": os.environ.get("ASTRA_DB_APPLICATION_TOKEN", ""),
+                "api_endpoint": os.environ.get("ASTRA_DB_API_ENDPOINT", "")
+            }
+        }
+
         print(f"INFO: Executing Langflow flow for question: {question}")
         result = run_flow_from_json(
             flow="flow.json",
-            input_value=question
+            input_value=question,
+            tweaks=tweaks
         )
         
         if result and len(result) > 0:
