@@ -1,7 +1,10 @@
 # main.py
 import os
 import sys
+from starlette.applications import Starlette
+from starlette.routing import Mount
 
+# Force line buffering so debugging text logs instantly inside the Render panel
 sys.stdout.reconfigure(line_buffering=True)
 sys.stderr.reconfigure(line_buffering=True)
 
@@ -9,8 +12,13 @@ try:
     from mcp.server.fastmcp import FastMCP
     mcp = FastMCP("HDRS-RAG-Retrieve")
     
-    # FIX: In v1 FastMCP, the underlying ASGI instance lives on .app, not .asgi_app
-    app = mcp.app
+    # Create a production ASGI endpoint layer
+    # FastMCP servers expose a .sse_app() hook to route network events
+    app = Starlette(
+        routes=[
+            Mount("/mcp", app=mcp.sse_app())
+        ]
+    )
     
 except Exception as e:
     print(f"CRITICAL: SDK Initialization failed: {e}", file=sys.stderr)
