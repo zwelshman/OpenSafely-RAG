@@ -3,3 +3,4 @@ langflow>=1.13.0
 langchain-astradb>=1.0.0
 astrapy>=2.3.2
 uvicorn
+gitpython
