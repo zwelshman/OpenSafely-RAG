@@ -13,7 +13,7 @@ sys.stderr.reconfigure(line_buffering=True)
 
 # 1. Initialize FastMCP with transport security configured for cloud hosting
 mcp = FastMCP(
-    "HDRS-RAG-Retrieve",
+    "OpenSafely-Rag-Retrieve",
     transport_security=TransportSecuritySettings(
         enable_dns_rebinding_protection=False,
         allowed_hosts=["*"]
@@ -87,7 +87,7 @@ def query_knowledge_base(question: str) -> str:
 
 # 3. Create standard FastAPI application
 app = FastAPI(
-    title="HDRS RAG MCP Server",
+    title="OpenSafely Rag MCP Server",
     description="Model Context Protocol (MCP) server delivering Astra DB RAG capabilities via Langflow."
 )
 
@@ -106,7 +106,7 @@ app.add_middleware(
 async def health_check():
     return {
         "status": "healthy",
-        "service": "HDRS-RAG-Retrieve-MCP",
+        "service": "OpenSafely-Rag-Retrieve-MCP",
         "sse_endpoint": "/mcp/sse"
     }
 
