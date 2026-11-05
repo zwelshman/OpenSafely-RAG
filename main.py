@@ -34,14 +34,15 @@ def query_knowledge_base(question: str) -> str:
 
         # Explicitly map Render system variables directly into the graph component configurations
         tweaks = {
-            "ext:openrouter:OpenRouterComponent@official-Lbbp3": {
-                "api_key": os.environ.get("OPENROUTER_API_KEY", "")
-            },
-            "ext:datastax:AstraDBVectorStoreComponent@official-zF58p": {
-                "token": os.environ.get("ASTRA_DB_APPLICATION_TOKEN", ""),
-                "api_endpoint": os.environ.get("ASTRA_DB_API_ENDPOINT", "")
-            }
-        }
+    "ext:openrouter:OpenRouterComponent@official-Lbbp3": {
+        "api_key": os.environ.get("OPENROUTER_API_KEY", ""),
+        "load_from_db": False  # <--- CRITICAL: Prevents Langflow from looking in a local DB
+    },
+    "ext:datastax:AstraDBVectorStoreComponent@official-zF58p": {
+        "token": os.environ.get("ASTRA_DB_APPLICATION_TOKEN", ""),
+        "api_endpoint": os.environ.get("ASTRA_DB_API_ENDPOINT", ""),
+        "load_from_db": False  # <--- CRITICAL: Forces it to use the token passed above
+    }}
 
         print(f"INFO: Executing Langflow flow for question: {question}")
         result = run_flow_from_json(
