@@ -30,6 +30,7 @@ An open-source **Langflow workflow** that exposes a hosted Model Context Protoco
 ## 🚀 Deployment & Integration
 
 * **Hosted MCP Server (SSE):** `https://opensafely-rag-1.onrender.com/mcp/sse`
+* **Tools:** `query_knowlege_base`
 
 ### VS Code / Cursor Configuration
 
