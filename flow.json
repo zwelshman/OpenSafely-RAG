@@ -122,66 +122,6 @@
         "className": "",
         "data": {
           "sourceHandle": {
-            "dataType": "Agent",
-            "id": "Agent-ynDSq",
-            "name": "response",
-            "output_types": [
-              "Message"
-            ]
-          },
-          "targetHandle": {
-            "fieldName": "input_value",
-            "id": "ChatOutput-hghjh",
-            "inputTypes": [
-              "Data",
-              "JSON",
-              "DataFrame",
-              "Table",
-              "Message"
-            ],
-            "type": "str"
-          }
-        },
-        "id": "xy-edge__Agent-ynDSq{œdataTypeœ:œAgentœ,œidœ:œAgent-ynDSqœ,œnameœ:œresponseœ,œoutput_typesœ:[œMessageœ]}-ChatOutput-hghjh{œfieldNameœ:œinput_valueœ,œidœ:œChatOutput-hghjhœ,œinputTypesœ:[œDataœ,œJSONœ,œDataFrameœ,œTableœ,œMessageœ],œtypeœ:œstrœ}",
-        "selected": false,
-        "source": "Agent-ynDSq",
-        "sourceHandle": "{œdataTypeœ:œAgentœ,œidœ:œAgent-ynDSqœ,œnameœ:œresponseœ,œoutput_typesœ:[œMessageœ]}",
-        "target": "ChatOutput-hghjh",
-        "targetHandle": "{œfieldNameœ:œinput_valueœ,œidœ:œChatOutput-hghjhœ,œinputTypesœ:[œDataœ,œJSONœ,œDataFrameœ,œTableœ,œMessageœ],œtypeœ:œstrœ}"
-      },
-      {
-        "animated": false,
-        "className": "",
-        "data": {
-          "sourceHandle": {
-            "dataType": "ChatInput",
-            "id": "ChatInput-eYNlT",
-            "name": "message",
-            "output_types": [
-              "Message"
-            ]
-          },
-          "targetHandle": {
-            "fieldName": "question",
-            "id": "Prompt-mmg24",
-            "inputTypes": [
-              "Message"
-            ],
-            "type": "str"
-          }
-        },
-        "id": "xy-edge__ChatInput-eYNlT{œdataTypeœ:œChatInputœ,œidœ:œChatInput-eYNlTœ,œnameœ:œmessageœ,œoutput_typesœ:[œMessageœ]}-Prompt-mmg24{œfieldNameœ:œquestionœ,œidœ:œPrompt-mmg24œ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
-        "selected": false,
-        "source": "ChatInput-eYNlT",
-        "sourceHandle": "{œdataTypeœ:œChatInputœ,œidœ:œChatInput-eYNlTœ,œnameœ:œmessageœ,œoutput_typesœ:[œMessageœ]}",
-        "target": "Prompt-mmg24",
-        "targetHandle": "{œfieldNameœ:œquestionœ,œidœ:œPrompt-mmg24œ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}"
-      },
-      {
-        "animated": false,
-        "className": "",
-        "data": {
-          "sourceHandle": {
             "dataType": "Prompt Template",
             "id": "Prompt Template-UMZzg",
             "name": "prompt",
@@ -232,6 +172,125 @@
         "sourceHandle": "{œdataTypeœ:œPromptœ,œidœ:œPrompt-mmg24œ,œnameœ:œpromptœ,œoutput_typesœ:[œMessageœ]}",
         "target": "Agent-ynDSq",
         "targetHandle": "{œfieldNameœ:œinput_valueœ,œidœ:œAgent-ynDSqœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "Agent",
+            "id": "Agent-ynDSq",
+            "name": "response",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "input_value",
+            "id": "StructuredOutput-7Nw9J",
+            "inputTypes": [
+              "Message"
+            ],
+            "type": "str"
+          }
+        },
+        "id": "xy-edge__Agent-ynDSq{œdataTypeœ:œAgentœ,œidœ:œAgent-ynDSqœ,œnameœ:œresponseœ,œoutput_typesœ:[œMessageœ]}-StructuredOutput-7Nw9J{œfieldNameœ:œinput_valueœ,œidœ:œStructuredOutput-7Nw9Jœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+        "selected": false,
+        "source": "Agent-ynDSq",
+        "sourceHandle": "{œdataTypeœ:œAgentœ,œidœ:œAgent-ynDSqœ,œnameœ:œresponseœ,œoutput_typesœ:[œMessageœ]}",
+        "target": "StructuredOutput-7Nw9J",
+        "targetHandle": "{œfieldNameœ:œinput_valueœ,œidœ:œStructuredOutput-7Nw9Jœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "StructuredOutput",
+            "id": "StructuredOutput-7Nw9J",
+            "name": "structured_output",
+            "output_types": [
+              "JSON"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "input_data",
+            "id": "parser-7joVo",
+            "inputTypes": [
+              "DataFrame",
+              "Table",
+              "Data",
+              "JSON"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "xy-edge__StructuredOutput-7Nw9J{œdataTypeœ:œStructuredOutputœ,œidœ:œStructuredOutput-7Nw9Jœ,œnameœ:œstructured_outputœ,œoutput_typesœ:[œJSONœ]}-parser-7joVo{œfieldNameœ:œinput_dataœ,œidœ:œparser-7joVoœ,œinputTypesœ:[œDataFrameœ,œTableœ,œDataœ,œJSONœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "StructuredOutput-7Nw9J",
+        "sourceHandle": "{œdataTypeœ:œStructuredOutputœ,œidœ:œStructuredOutput-7Nw9Jœ,œnameœ:œstructured_outputœ,œoutput_typesœ:[œJSONœ]}",
+        "target": "parser-7joVo",
+        "targetHandle": "{œfieldNameœ:œinput_dataœ,œidœ:œparser-7joVoœ,œinputTypesœ:[œDataFrameœ,œTableœ,œDataœ,œJSONœ],œtypeœ:œotherœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "parser",
+            "id": "parser-7joVo",
+            "name": "parsed_text",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "input_value",
+            "id": "ChatOutput-hghjh",
+            "inputTypes": [
+              "Data",
+              "JSON",
+              "DataFrame",
+              "Table",
+              "Message"
+            ],
+            "type": "str"
+          }
+        },
+        "id": "xy-edge__parser-7joVo{œdataTypeœ:œparserœ,œidœ:œparser-7joVoœ,œnameœ:œparsed_textœ,œoutput_typesœ:[œMessageœ]}-ChatOutput-hghjh{œfieldNameœ:œinput_valueœ,œidœ:œChatOutput-hghjhœ,œinputTypesœ:[œDataœ,œJSONœ,œDataFrameœ,œTableœ,œMessageœ],œtypeœ:œstrœ}",
+        "selected": false,
+        "source": "parser-7joVo",
+        "sourceHandle": "{œdataTypeœ:œparserœ,œidœ:œparser-7joVoœ,œnameœ:œparsed_textœ,œoutput_typesœ:[œMessageœ]}",
+        "target": "ChatOutput-hghjh",
+        "targetHandle": "{œfieldNameœ:œinput_valueœ,œidœ:œChatOutput-hghjhœ,œinputTypesœ:[œDataœ,œJSONœ,œDataFrameœ,œTableœ,œMessageœ],œtypeœ:œstrœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "ChatInput",
+            "id": "ChatInput-eYNlT",
+            "name": "message",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "question",
+            "id": "Prompt-mmg24",
+            "inputTypes": [
+              "Message"
+            ],
+            "type": "str"
+          }
+        },
+        "id": "xy-edge__ChatInput-eYNlT{œdataTypeœ:œChatInputœ,œidœ:œChatInput-eYNlTœ,œnameœ:œmessageœ,œoutput_typesœ:[œMessageœ]}-Prompt-mmg24{œfieldNameœ:œquestionœ,œidœ:œPrompt-mmg24œ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+        "selected": false,
+        "source": "ChatInput-eYNlT",
+        "sourceHandle": "{œdataTypeœ:œChatInputœ,œidœ:œChatInput-eYNlTœ,œnameœ:œmessageœ,œoutput_typesœ:[œMessageœ]}",
+        "target": "Prompt-mmg24",
+        "targetHandle": "{œfieldNameœ:œquestionœ,œidœ:œPrompt-mmg24œ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}"
       }
     ],
     "nodes": [
@@ -488,10 +547,6 @@
         },
         "dragging": false,
         "id": "ChatInput-eYNlT",
-        "measured": {
-          "height": 207,
-          "width": 320
-        },
         "position": {
           "x": 1262.7191485970427,
           "y": 666.1661154720106
@@ -500,7 +555,7 @@
           "x": 1178.0239685549568,
           "y": 879.9087836229152
         },
-        "selected": true,
+        "selected": false,
         "type": "genericNode"
       },
       {
@@ -541,7 +596,7 @@
             ],
             "frozen": false,
             "icon": "bot",
-            "last_updated": "2026-11-04T23:54:05.907Z",
+            "last_updated": "2026-11-05T00:09:43.458Z",
             "legacy": false,
             "lf_version": "1.13.0",
             "metadata": {
@@ -840,7 +895,7 @@
               "is_refresh": true,
               "max_iterations": {
                 "_input_type": "IntInput",
-                "advanced": true,
+                "advanced": false,
                 "display_name": "Max Iterations",
                 "dynamic": false,
                 "info": "Maximum number of model calls the agent can make before stopping (maps to `ModelCallLimitMiddleware.run_limit` on the create_agent path). Must be at least 1 — it is a safety cap, never 'unlimited'.",
@@ -863,7 +918,7 @@
                 "trace_as_metadata": true,
                 "track_in_telemetry": true,
                 "type": "int",
-                "value": 15
+                "value": 3
               },
               "max_tokens": {
                 "_input_type": "IntInput",
@@ -1257,10 +1312,6 @@
         },
         "dragging": false,
         "id": "Agent-ynDSq",
-        "measured": {
-          "height": 431,
-          "width": 320
-        },
         "position": {
           "x": 2149.4057465514657,
           "y": 268.2024683894009
@@ -1573,13 +1624,9 @@
         },
         "dragging": false,
         "id": "ChatOutput-hghjh",
-        "measured": {
-          "height": 207,
-          "width": 320
-        },
         "position": {
-          "x": 2600.3894753999202,
-          "y": 242.52673028276877
+          "x": 3410.7435697306846,
+          "y": 113.56668999418667
         },
         "selected": false,
         "type": "genericNode"
@@ -1760,10 +1807,6 @@
         },
         "dragging": false,
         "id": "ext:git:GitExtractorComponent@official-3taHm",
-        "measured": {
-          "height": 223,
-          "width": 320
-        },
         "position": {
           "x": 516.1949831886848,
           "y": -74.87843222637018
@@ -3044,10 +3087,6 @@
         },
         "dragging": false,
         "id": "ext:openrouter:OpenRouterComponent@official-nxW9J",
-        "measured": {
-          "height": 485,
-          "width": 320
-        },
         "position": {
           "x": 1801.1560596711101,
           "y": -179.4370902990578
@@ -3231,10 +3270,6 @@
         },
         "dragging": false,
         "id": "ext:git:GitExtractorComponent@official-V3Gsc",
-        "measured": {
-          "height": 223,
-          "width": 320
-        },
         "position": {
           "x": 833.1278293244472,
           "y": 385.31523259697906
@@ -3460,10 +3495,6 @@
         },
         "dragging": false,
         "id": "Prompt Template-UMZzg",
-        "measured": {
-          "height": 429,
-          "width": 320
-        },
         "position": {
           "x": 1340.5693152486617,
           "y": 181.35164242566609
@@ -3648,10 +3679,6 @@
         },
         "dragging": false,
         "id": "TypeConverterComponent-U3Sm7",
-        "measured": {
-          "height": 265,
-          "width": 320
-        },
         "position": {
           "x": 919.0063439629362,
           "y": 64.96928844498163
@@ -3869,22 +3896,737 @@
         },
         "dragging": false,
         "id": "Prompt-mmg24",
-        "measured": {
-          "height": 429,
-          "width": 320
-        },
         "position": {
-          "x": 1783.0609785451743,
-          "y": 502.1307202173127
+          "x": 1773.6247244983936,
+          "y": 447.4004467459842
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "StructuredOutput-7Nw9J",
+          "node": {
+            "base_classes": [
+              "JSON",
+              "Table"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Uses an LLM to generate structured data. Ideal for extraction and consistency.",
+            "display_name": "Structured Output",
+            "documentation": "https://docs.langflow.org/structured-output",
+            "edited": false,
+            "field_order": [
+              "model",
+              "api_key",
+              "input_value",
+              "system_prompt",
+              "schema_name",
+              "output_schema"
+            ],
+            "frozen": false,
+            "icon": "braces",
+            "last_updated": "2026-11-05T00:09:43.463Z",
+            "legacy": false,
+            "lf_version": "1.13.0",
+            "metadata": {
+              "code_hash": "c87c265c9032",
+              "component_class_name": "StructuredOutputComponent",
+              "dependencies": {
+                "dependencies": [
+                  {
+                    "name": "pydantic",
+                    "version": "2.13.4"
+                  },
+                  {
+                    "name": "trustcall",
+                    "version": "0.0.39"
+                  },
+                  {
+                    "name": "lfx",
+                    "version": null
+                  }
+                ],
+                "total_dependencies": 3
+              },
+              "module": "lfx.components.llm_operations.structured_output.StructuredOutputComponent"
+            },
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Structured Output",
+                "group_outputs": false,
+                "hidden": null,
+                "loop_types": null,
+                "method": "build_structured_output",
+                "name": "structured_output",
+                "options": null,
+                "required_inputs": null,
+                "selected": "JSON",
+                "tool_mode": true,
+                "types": [
+                  "JSON"
+                ],
+                "value": "__UNDEFINED__"
+              },
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Structured Output",
+                "group_outputs": false,
+                "hidden": null,
+                "loop_types": null,
+                "method": "build_structured_dataframe",
+                "name": "dataframe_output",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Table",
+                "tool_mode": true,
+                "types": [
+                  "Table"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_frontend_node_flow_id": {
+                "value": "14b5b718-aae8-4b39-bdb0-abba5f82df08"
+              },
+              "_frontend_node_folder_id": {
+                "value": "418f9abd-b4b0-4cdb-af53-82452b29dea4"
+              },
+              "_type": "Component",
+              "api_key": {
+                "_input_type": "SecretStrInput",
+                "advanced": true,
+                "api_editable": false,
+                "display_name": "API Key",
+                "dynamic": false,
+                "info": "Overrides global provider settings. Leave blank to use your pre-configured API Key.",
+                "input_types": [],
+                "load_from_db": false,
+                "name": "api_key",
+                "override_skip": false,
+                "password": true,
+                "placeholder": "",
+                "real_time_refresh": true,
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "track_in_telemetry": false,
+                "type": "str",
+                "value": ""
+              },
+              "code": {
+                "advanced": true,
+                "api_editable": false,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from pydantic import BaseModel, Field, create_model\nfrom trustcall import create_extractor\n\nfrom lfx.base.agents.token_callback import TokenUsageCallbackHandler\nfrom lfx.base.models.chat_result import get_chat_result\nfrom lfx.base.models.unified_models import (\n    get_llm,\n    handle_model_input_update,\n)\nfrom lfx.custom.custom_component.component import Component\nfrom lfx.helpers.base_model import build_model_from_schema\nfrom lfx.io import (\n    MessageTextInput,\n    ModelInput,\n    MultilineInput,\n    Output,\n    SecretStrInput,\n    TableInput,\n)\nfrom lfx.log.logger import logger\nfrom lfx.schema.data import Data\nfrom lfx.schema.dataframe import DataFrame\nfrom lfx.schema.table import EditMode\n\n\nclass StructuredOutputComponent(Component):\n    display_name = \"Structured Output\"\n    description = \"Uses an LLM to generate structured data. Ideal for extraction and consistency.\"\n    documentation: str = \"https://docs.langflow.org/structured-output\"\n    name = \"StructuredOutput\"\n    icon = \"braces\"\n\n    inputs = [\n        ModelInput(\n            name=\"model\",\n            display_name=\"Language Model\",\n            info=\"Select your model provider\",\n            real_time_refresh=True,\n            required=True,\n        ),\n        SecretStrInput(\n            name=\"api_key\",\n            display_name=\"API Key\",\n            info=\"Overrides global provider settings. Leave blank to use your pre-configured API Key.\",\n            real_time_refresh=True,\n            advanced=True,\n        ),\n        MultilineInput(\n            name=\"input_value\",\n            display_name=\"Input Message\",\n            info=\"The input message to the language model.\",\n            tool_mode=True,\n            required=True,\n        ),\n        MultilineInput(\n            name=\"system_prompt\",\n            display_name=\"Format Instructions\",\n            info=\"The instructions to the language model for formatting the output.\",\n            value=(\n                \"You are an AI that extracts structured JSON objects from unstructured text. \"\n                \"Use a predefined schema with expected types (str, int, float, bool, dict). \"\n                \"Extract ALL relevant instances that match the schema - if multiple patterns exist, capture them all. \"\n                \"Fill missing or ambiguous values with defaults: null for missing values. \"\n                \"Remove exact duplicates but keep variations that have different field values. \"\n                \"Always return valid JSON in the expected format, never throw errors. \"\n                \"If multiple objects can be extracted, return them all in the structured format.\"\n            ),\n            required=True,\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"schema_name\",\n            display_name=\"Schema Name\",\n            info=\"Provide a name for the output data schema.\",\n            advanced=True,\n        ),\n        TableInput(\n            name=\"output_schema\",\n            display_name=\"Output Schema\",\n            info=\"Define the structure and data types for the model's output.\",\n            required=True,\n            # TODO: remove default value\n            table_schema=[\n                {\n                    \"name\": \"name\",\n                    \"display_name\": \"Name\",\n                    \"type\": \"str\",\n                    \"description\": \"Specify the name of the output field.\",\n                    \"default\": \"field\",\n                    \"edit_mode\": EditMode.INLINE,\n                },\n                {\n                    \"name\": \"description\",\n                    \"display_name\": \"Description\",\n                    \"type\": \"str\",\n                    \"description\": \"Describe the purpose of the output field.\",\n                    \"default\": \"description of field\",\n                    \"edit_mode\": EditMode.POPOVER,\n                },\n                {\n                    \"name\": \"type\",\n                    \"display_name\": \"Type\",\n                    \"type\": \"str\",\n                    \"edit_mode\": EditMode.INLINE,\n                    \"description\": (\"Indicate the data type of the output field (e.g., str, int, float, bool, dict).\"),\n                    \"options\": [\"str\", \"int\", \"float\", \"bool\", \"dict\"],\n                    \"default\": \"str\",\n                },\n                {\n                    \"name\": \"multiple\",\n                    \"display_name\": \"As List\",\n                    \"type\": \"boolean\",\n                    \"description\": \"Set to True if this output field should be a list of the specified type.\",\n                    \"default\": \"False\",\n                    \"edit_mode\": EditMode.INLINE,\n                },\n            ],\n            value=[\n                {\n                    \"name\": \"field\",\n                    \"description\": \"description of field\",\n                    \"type\": \"str\",\n                    \"multiple\": \"False\",\n                }\n            ],\n        ),\n    ]\n\n    outputs = [\n        Output(\n            name=\"structured_output\",\n            display_name=\"Structured Output\",\n            method=\"build_structured_output\",\n        ),\n        Output(\n            name=\"dataframe_output\",\n            display_name=\"Structured Output\",\n            method=\"build_structured_dataframe\",\n        ),\n    ]\n\n    def update_build_config(self, build_config: dict, field_value: str, field_name: str | None = None):\n        \"\"\"Dynamically update build config with user-filtered model options.\"\"\"\n        return handle_model_input_update(self, build_config, field_value, field_name)\n\n    def build_structured_output_base(self):\n        schema_name = self.schema_name or \"OutputModel\"\n\n        llm = get_llm(model=self.model, user_id=self.user_id, api_key=self.api_key)\n\n        if not hasattr(llm, \"with_structured_output\"):\n            msg = \"Language model does not support structured output.\"\n            raise TypeError(msg)\n        if not self.output_schema:\n            msg = \"Output schema cannot be empty\"\n            raise ValueError(msg)\n\n        output_model_ = build_model_from_schema(self.output_schema)\n        output_model = create_model(\n            schema_name,\n            __doc__=f\"A list of {schema_name}.\",\n            objects=(\n                list[output_model_],\n                Field(\n                    description=f\"A list of {schema_name}.\",  # type: ignore[valid-type]\n                    min_length=1,  # help ensure non-empty output\n                ),\n            ),\n        )\n        # Tracing config with token usage handler injected into the callbacks chain.\n        # get_chat_result() reads \"get_langchain_callbacks\" as a callable, so we wrap\n        # the list in a lambda to match its expected interface.\n        token_handler = TokenUsageCallbackHandler()\n        base_callbacks = self.get_langchain_callbacks()\n        config_dict = {\n            \"display_name\": self.display_name,\n            \"get_project_name\": self.get_project_name,\n            \"get_langchain_callbacks\": lambda: [*base_callbacks, token_handler],\n        }\n        # Generate structured output using Trustcall first, then fallback to Langchain if it fails\n        result = self._extract_output_with_trustcall(llm, output_model, config_dict)\n        if result is None:\n            result = self._extract_output_with_langchain(llm, output_model, config_dict)\n        self._token_usage = token_handler.get_usage()\n\n        # OPTIMIZATION NOTE: Simplified processing based on trustcall response structure\n        # Handle non-dict responses (shouldn't happen with trustcall, but defensive)\n        if not isinstance(result, dict):\n            return result\n\n        # Extract first response and convert BaseModel to dict\n        responses = result.get(\"responses\", [])\n        if not responses:\n            return result\n\n        # Convert BaseModel to dict (creates the \"objects\" key)\n        first_response = responses[0]\n        structured_data = first_response\n        if isinstance(first_response, BaseModel):\n            structured_data = first_response.model_dump()\n        # Extract the objects array (guaranteed to exist due to our Pydantic model structure)\n        return structured_data.get(\"objects\", structured_data)\n\n    def build_structured_output(self) -> Data:\n        output = self.build_structured_output_base()\n        if not isinstance(output, list) or not output:\n            # handle empty or unexpected type case\n            msg = \"No structured output returned\"\n            raise ValueError(msg)\n        if len(output) == 1:\n            return Data(data=output[0])\n        if len(output) > 1:\n            # Multiple outputs - wrap them in a results container\n            return Data(data={\"results\": output})\n        return Data()\n\n    def build_structured_dataframe(self) -> DataFrame:\n        output = self.build_structured_output_base()\n        if not isinstance(output, list) or not output:\n            # handle empty or unexpected type case\n            msg = \"No structured output returned\"\n            raise ValueError(msg)\n        if len(output) == 1:\n            # For single dictionary, wrap in a list to create DataFrame with one row\n            return DataFrame([output[0]])\n        if len(output) > 1:\n            # Multiple outputs - convert to DataFrame directly\n            return DataFrame(output)\n        return DataFrame()\n\n    def _extract_output_with_trustcall(self, llm, schema: BaseModel, config_dict: dict) -> list[BaseModel] | None:\n        try:\n            llm_with_structured_output = create_extractor(llm, tools=[schema], tool_choice=schema.__name__)\n            result = get_chat_result(\n                runnable=llm_with_structured_output,\n                remediation_target=llm,\n                system_message=self.system_prompt,\n                input_value=self.input_value,\n                config=config_dict,\n            )\n        except Exception as e:  # noqa: BLE001\n            logger.warning(\n                f\"Trustcall extraction failed, falling back to Langchain: {e} \"\n                \"(Note: This may not be an error—some models or configurations do not support tool calling. \"\n                \"Falling back is normal in such cases.)\"\n            )\n            return None\n        return result or None  # langchain fallback is used if error occurs or the result is empty\n\n    def _extract_output_with_langchain(self, llm, schema: BaseModel, config_dict: dict) -> list[BaseModel] | None:\n        try:\n            llm_with_structured_output = llm.with_structured_output(schema)\n            result = get_chat_result(\n                runnable=llm_with_structured_output,\n                remediation_target=llm,\n                system_message=self.system_prompt,\n                input_value=self.input_value,\n                config=config_dict,\n            )\n            if isinstance(result, BaseModel):\n                result = result.model_dump()\n                result = result.get(\"objects\", result)\n        except Exception as fallback_error:\n            msg = (\n                f\"Model does not support tool calling (trustcall failed) \"\n                f\"and fallback with_structured_output also failed: {fallback_error}\"\n            )\n            raise ValueError(msg) from fallback_error\n\n        return result or None\n"
+              },
+              "input_value": {
+                "_input_type": "MultilineInput",
+                "advanced": false,
+                "ai_enabled": false,
+                "api_editable": false,
+                "copy_field": false,
+                "display_name": "Input Message",
+                "dynamic": false,
+                "info": "The input message to the language model.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "multiline": true,
+                "name": "input_value",
+                "override_skip": false,
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": true,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "track_in_telemetry": false,
+                "type": "str",
+                "value": ""
+              },
+              "is_refresh": true,
+              "model": {
+                "_input_type": "ModelInput",
+                "advanced": false,
+                "api_editable": false,
+                "display_name": "Language Model",
+                "dynamic": false,
+                "external_options": {
+                  "fields": {
+                    "data": {
+                      "node": {
+                        "display_name": "Connect other models",
+                        "icon": "CornerDownLeft",
+                        "name": "connect_other_models"
+                      }
+                    }
+                  }
+                },
+                "info": "Select your model provider",
+                "input_types": [
+                  "LanguageModel"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "model_type": "language",
+                "name": "model",
+                "options": [
+                  {
+                    "category": "OpenRouter",
+                    "icon": "OpenRouter",
+                    "metadata": {
+                      "api_key_param": "api_key",
+                      "context_length": 128000,
+                      "max_tokens_field_name": "max_tokens",
+                      "model_class": "ChatOpenAI",
+                      "model_name_param": "model",
+                      "reasoning": true,
+                      "reasoning_models": [
+                        "anthropic/claude-haiku-4.5"
+                      ]
+                    },
+                    "name": "anthropic/claude-haiku-4.5",
+                    "provider": "OpenRouter"
+                  },
+                  {
+                    "category": "OpenRouter",
+                    "icon": "OpenRouter",
+                    "metadata": {
+                      "api_key_param": "api_key",
+                      "context_length": 128000,
+                      "max_tokens_field_name": "max_tokens",
+                      "model_class": "ChatOpenAI",
+                      "model_name_param": "model",
+                      "reasoning": true,
+                      "reasoning_models": [
+                        "anthropic/claude-opus-4.7"
+                      ]
+                    },
+                    "name": "anthropic/claude-opus-4.7",
+                    "provider": "OpenRouter"
+                  },
+                  {
+                    "category": "OpenRouter",
+                    "icon": "OpenRouter",
+                    "metadata": {
+                      "api_key_param": "api_key",
+                      "context_length": 128000,
+                      "max_tokens_field_name": "max_tokens",
+                      "model_class": "ChatOpenAI",
+                      "model_name_param": "model",
+                      "reasoning": true,
+                      "reasoning_models": [
+                        "anthropic/claude-sonnet-4.5"
+                      ]
+                    },
+                    "name": "anthropic/claude-sonnet-4.5",
+                    "provider": "OpenRouter"
+                  },
+                  {
+                    "category": "OpenRouter",
+                    "icon": "OpenRouter",
+                    "metadata": {
+                      "api_key_param": "api_key",
+                      "context_length": 128000,
+                      "max_tokens_field_name": "max_tokens",
+                      "model_class": "ChatOpenAI",
+                      "model_name_param": "model",
+                      "reasoning": true,
+                      "reasoning_models": [
+                        "google/gemini-2.5-pro"
+                      ]
+                    },
+                    "name": "google/gemini-2.5-pro",
+                    "provider": "OpenRouter"
+                  },
+                  {
+                    "category": "OpenRouter",
+                    "icon": "OpenRouter",
+                    "metadata": {
+                      "api_key_param": "api_key",
+                      "context_length": 128000,
+                      "max_tokens_field_name": "max_tokens",
+                      "model_class": "ChatOpenAI",
+                      "model_name_param": "model"
+                    },
+                    "name": "meta-llama/llama-3.3-70b-instruct",
+                    "provider": "OpenRouter"
+                  },
+                  {
+                    "category": "OpenRouter",
+                    "icon": "OpenRouter",
+                    "metadata": {
+                      "api_key_param": "api_key",
+                      "context_length": 128000,
+                      "max_tokens_field_name": "max_tokens",
+                      "model_class": "ChatOpenAI",
+                      "model_name_param": "model"
+                    },
+                    "name": "openai/gpt-4o",
+                    "provider": "OpenRouter"
+                  },
+                  {
+                    "category": "OpenRouter",
+                    "icon": "OpenRouter",
+                    "metadata": {
+                      "api_key_param": "api_key",
+                      "context_length": 128000,
+                      "max_tokens_field_name": "max_tokens",
+                      "model_class": "ChatOpenAI",
+                      "model_name_param": "model"
+                    },
+                    "name": "openai/gpt-4o-mini",
+                    "provider": "OpenRouter"
+                  }
+                ],
+                "override_skip": false,
+                "placeholder": "Setup Provider",
+                "real_time_refresh": true,
+                "refresh_button": true,
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "track_in_telemetry": false,
+                "type": "model",
+                "value": [
+                  {
+                    "icon": "OpenRouter",
+                    "metadata": {
+                      "api_key_param": "api_key",
+                      "context_length": 128000,
+                      "max_tokens_field_name": "max_tokens",
+                      "model_class": "ChatOpenAI",
+                      "model_name_param": "model",
+                      "reasoning": true,
+                      "reasoning_models": [
+                        "anthropic/claude-haiku-4.5"
+                      ]
+                    },
+                    "name": "anthropic/claude-haiku-4.5",
+                    "provider": "OpenRouter"
+                  }
+                ]
+              },
+              "output_schema": {
+                "_input_type": "TableInput",
+                "advanced": false,
+                "api_editable": false,
+                "display_name": "Output Schema",
+                "dynamic": false,
+                "info": "Define the structure and data types for the model's output.",
+                "input_types": [
+                  "DataFrame",
+                  "Table"
+                ],
+                "is_list": true,
+                "list_add_label": "Add More",
+                "name": "output_schema",
+                "override_skip": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "table_icon": "Table",
+                "table_schema": [
+                  {
+                    "default": "field",
+                    "description": "Specify the name of the output field.",
+                    "display_name": "Name",
+                    "edit_mode": "inline",
+                    "formatter": "text",
+                    "name": "name",
+                    "type": "str"
+                  },
+                  {
+                    "default": "description of field",
+                    "description": "Describe the purpose of the output field.",
+                    "display_name": "Description",
+                    "edit_mode": "popover",
+                    "formatter": "text",
+                    "name": "description",
+                    "type": "str"
+                  },
+                  {
+                    "default": "str",
+                    "description": "Indicate the data type of the output field (e.g., str, int, float, bool, dict).",
+                    "display_name": "Type",
+                    "edit_mode": "inline",
+                    "formatter": "text",
+                    "name": "type",
+                    "options": [
+                      "str",
+                      "int",
+                      "float",
+                      "bool",
+                      "dict"
+                    ],
+                    "type": "str"
+                  },
+                  {
+                    "default": "False",
+                    "description": "Set to True if this output field should be a list of the specified type.",
+                    "display_name": "As List",
+                    "edit_mode": "inline",
+                    "formatter": "boolean",
+                    "name": "multiple",
+                    "type": "boolean"
+                  }
+                ],
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "track_in_telemetry": false,
+                "trigger_icon": "Table",
+                "trigger_text": "Open table",
+                "type": "table",
+                "value": [
+                  {
+                    "description": "The users question",
+                    "multiple": "False",
+                    "name": "User Query",
+                    "type": "str"
+                  },
+                  {
+                    "description": "A summary of the response",
+                    "multiple": "False",
+                    "name": "Summary of Response",
+                    "type": "str"
+                  },
+                  {
+                    "description": "The Python Code needed to service the users query",
+                    "multiple": "False",
+                    "name": "Code",
+                    "type": "str"
+                  }
+                ]
+              },
+              "schema_name": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "api_editable": false,
+                "display_name": "Schema Name",
+                "dynamic": false,
+                "info": "Provide a name for the output data schema.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "schema_name",
+                "override_skip": false,
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "track_in_telemetry": false,
+                "type": "str",
+                "value": ""
+              },
+              "system_prompt": {
+                "_input_type": "MultilineInput",
+                "advanced": true,
+                "ai_enabled": false,
+                "api_editable": false,
+                "copy_field": false,
+                "display_name": "Format Instructions",
+                "dynamic": false,
+                "info": "The instructions to the language model for formatting the output.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "multiline": true,
+                "name": "system_prompt",
+                "override_skip": false,
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "track_in_telemetry": false,
+                "type": "str",
+                "value": "You are an AI that extracts structured JSON objects from unstructured text. Use a predefined schema with expected types (str, int, float, bool, dict). Extract ALL relevant instances that match the schema - if multiple patterns exist, capture them all. Fill missing or ambiguous values with defaults: null for missing values. Remove exact duplicates but keep variations that have different field values. Always return valid JSON in the expected format, never throw errors. If multiple objects can be extracted, return them all in the structured format."
+              }
+            },
+            "tool_mode": false
+          },
+          "selected_output": "structured_output",
+          "showNode": true,
+          "type": "StructuredOutput"
+        },
+        "dragging": false,
+        "id": "StructuredOutput-7Nw9J",
+        "position": {
+          "x": 2583.2203587192375,
+          "y": 223.0123929804137
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "parser-7joVo",
+          "node": {
+            "base_classes": [
+              "Message"
+            ],
+            "beta": false,
+            "category": "processing",
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Extracts text using a template.",
+            "display_name": "Parser",
+            "documentation": "",
+            "edited": false,
+            "field_order": [
+              "input_data",
+              "mode",
+              "pattern",
+              "sep"
+            ],
+            "frozen": false,
+            "icon": "braces",
+            "key": "parser",
+            "last_updated": "2026-11-04T10:56:45.859Z",
+            "legacy": false,
+            "lf_version": "1.13.0",
+            "metadata": {
+              "code_hash": "7ab5fd0e0a10",
+              "component_class_name": "ParserComponent",
+              "dependencies": {
+                "dependencies": [
+                  {
+                    "name": "lfx",
+                    "version": null
+                  }
+                ],
+                "total_dependencies": 1
+              },
+              "module": "lfx.components.processing.parser.ParserComponent"
+            },
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Parsed Text",
+                "group_outputs": false,
+                "loop_types": null,
+                "method": "parse_combined_text",
+                "name": "parsed_text",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Message",
+                "tool_mode": true,
+                "types": [
+                  "Message"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "score": 2.220446049250313e-16,
+            "template": {
+              "_frontend_node_flow_id": {
+                "value": "5b8c0ffb-2cbb-45de-bcbc-2358e9b3779c"
+              },
+              "_frontend_node_folder_id": {
+                "value": "418f9abd-b4b0-4cdb-af53-82452b29dea4"
+              },
+              "_type": "Component",
+              "clean_data": {
+                "_input_type": "BoolInput",
+                "advanced": true,
+                "api_editable": false,
+                "display_name": "Clean Data",
+                "dynamic": false,
+                "info": "Enable to clean the data by removing empty rows and lines in each cell of the DataFrame/ Data object.",
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "clean_data",
+                "override_skip": false,
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "track_in_telemetry": true,
+                "type": "bool",
+                "value": true
+              },
+              "code": {
+                "advanced": true,
+                "api_editable": false,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from lfx.custom.custom_component.component import Component\nfrom lfx.helpers.data import safe_convert\nfrom lfx.inputs.inputs import BoolInput, HandleInput, MessageTextInput, MultilineInput, TabInput\nfrom lfx.schema.data import Data\nfrom lfx.schema.dataframe import DataFrame\nfrom lfx.schema.message import Message\nfrom lfx.template.field.base import Output\n\n\nclass _DefaultDict(dict):\n    def __init__(self, data_item: Data):\n        super().__init__(data_item.data)\n        self.default_value = data_item.default_value\n\n    def __missing__(self, key):\n        return self.default_value if self.default_value is not None else \"\"\n\n\nclass ParserComponent(Component):\n    display_name = \"Parser\"\n    description = \"Extracts text using a template.\"\n    documentation: str = \"https://docs.langflow.org/parser\"\n    icon = \"braces\"\n\n    inputs = [\n        HandleInput(\n            name=\"input_data\",\n            display_name=\"JSON or Table\",\n            input_types=[\"DataFrame\", \"Table\", \"Data\", \"JSON\"],\n            info=\"Accepts a DataFrame, a Data object, or a list of Data objects.\",\n            required=True,\n        ),\n        TabInput(\n            name=\"mode\",\n            display_name=\"Mode\",\n            options=[\"Parser\", \"Stringify\"],\n            value=\"Parser\",\n            info=\"Convert into raw string instead of using a template.\",\n            real_time_refresh=True,\n        ),\n        MultilineInput(\n            name=\"pattern\",\n            display_name=\"Template\",\n            info=(\n                \"Use variables within curly brackets to extract column values for DataFrames \"\n                \"or key values for Data.\"\n                \"For example: `Name: {Name}, Age: {Age}, Country: {Country}`\"\n            ),\n            value=\"Text: {text}\",  # Example default\n            dynamic=True,\n            show=True,\n            required=True,\n        ),\n        MessageTextInput(\n            name=\"sep\",\n            display_name=\"Separator\",\n            advanced=True,\n            value=\"\\n\",\n            info=\"String used to separate rows/items.\",\n        ),\n    ]\n\n    outputs = [\n        Output(\n            display_name=\"Parsed Text\",\n            name=\"parsed_text\",\n            info=\"Formatted text output.\",\n            method=\"parse_combined_text\",\n        ),\n    ]\n\n    def update_build_config(self, build_config, field_value, field_name=None):\n        \"\"\"Dynamically hide/show `template` and enforce requirement based on `stringify`.\"\"\"\n        if field_name == \"mode\":\n            build_config[\"pattern\"][\"show\"] = self.mode == \"Parser\"\n            build_config[\"pattern\"][\"required\"] = self.mode == \"Parser\"\n            if field_value:\n                clean_data = BoolInput(\n                    name=\"clean_data\",\n                    display_name=\"Clean Data\",\n                    info=(\n                        \"Enable to clean the data by removing empty rows and lines \"\n                        \"in each cell of the DataFrame/ Data object.\"\n                    ),\n                    value=True,\n                    advanced=True,\n                    required=False,\n                )\n                build_config[\"clean_data\"] = clean_data.to_dict()\n            else:\n                build_config.pop(\"clean_data\", None)\n\n        return build_config\n\n    def _clean_args(self) -> tuple[DataFrame | None, Data | list[Data] | None]:\n        \"\"\"Prepare arguments based on input type.\"\"\"\n        input_data = self.input_data\n\n        match input_data:\n            case list() if all(isinstance(item, Data) for item in input_data):\n                return None, input_data\n            case DataFrame():\n                return input_data, None\n            case Data():\n                return None, input_data\n            case dict() if \"data\" in input_data:\n                try:\n                    if \"columns\" in input_data:  # Likely a DataFrame\n                        return DataFrame.from_dict(input_data), None\n                    # Likely a Data object\n                    return None, Data(**input_data)\n                except (TypeError, ValueError, KeyError) as e:\n                    msg = f\"Invalid structured input provided: {e!s}\"\n                    raise ValueError(msg) from e\n            case _:\n                msg = f\"Unsupported input type: {type(input_data)}. Expected DataFrame, Data, or list[Data].\"\n                raise ValueError(msg)\n\n    def parse_combined_text(self) -> Message:\n        \"\"\"Parse all rows/items into a single text or convert input to string if `stringify` is enabled.\"\"\"\n        # Early return for stringify option\n        if self.mode == \"Stringify\":\n            return self.convert_to_string()\n\n        df, data = self._clean_args()\n\n        lines = []\n        if df is not None:\n            for _, row in df.iterrows():\n                formatted_text = self.pattern.format(**row.to_dict())\n                lines.append(formatted_text)\n        elif data is not None:\n            data_items = data if isinstance(data, list) else [data]\n            for data_item in data_items:\n                formatted_text = self.pattern.format_map(_DefaultDict(data_item))\n                lines.append(formatted_text)\n\n        combined_text = self.sep.join(lines)\n        self.status = combined_text\n        return Message(text=combined_text)\n\n    def convert_to_string(self) -> Message:\n        \"\"\"Convert input data to string with proper error handling.\"\"\"\n        clean_data = getattr(self, \"clean_data\", False)\n        if isinstance(self.input_data, list):\n            result = \"\\n\".join(safe_convert(item, clean_data=clean_data) for item in self.input_data)\n        else:\n            result = safe_convert(self.input_data, clean_data=clean_data)\n        self.log(f\"Converted to string with length: {len(result)}\")\n\n        message = Message(text=result)\n        self.status = message\n        return message\n"
+              },
+              "input_data": {
+                "_input_type": "HandleInput",
+                "advanced": false,
+                "display_name": "JSON or Table",
+                "dynamic": false,
+                "info": "Accepts a DataFrame, a Data object, or a list of Data objects.",
+                "input_types": [
+                  "DataFrame",
+                  "Table",
+                  "Data",
+                  "JSON"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "input_data",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "trace_as_metadata": true,
+                "type": "other",
+                "value": ""
+              },
+              "is_refresh": false,
+              "mode": {
+                "_input_type": "TabInput",
+                "advanced": false,
+                "display_name": "Mode",
+                "dynamic": false,
+                "info": "Convert into raw string instead of using a template.",
+                "name": "mode",
+                "options": [
+                  "Parser",
+                  "Stringify"
+                ],
+                "placeholder": "",
+                "real_time_refresh": true,
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "tab",
+                "value": "Parser"
+              },
+              "pattern": {
+                "_input_type": "MultilineInput",
+                "advanced": false,
+                "copy_field": false,
+                "display_name": "Template",
+                "dynamic": true,
+                "info": "Use variables within curly brackets to extract column values for DataFrames or key values for Data.For example: `Name: {Name}, Age: {Age}, Country: {Country}`",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "multiline": true,
+                "name": "pattern",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "### 🔍 User Query \n{User Query}  \n\n### 📝 Summary of Response \n{Summary of Response}  \n\n### 💻 Generated Code \n```python \n{Code}\n```"
+              },
+              "sep": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "display_name": "Separator",
+                "dynamic": false,
+                "info": "String used to separate rows/items.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "sep",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "\n"
+              }
+            },
+            "tool_mode": false
+          },
+          "selected_output": "parsed_text",
+          "showNode": true,
+          "type": "parser"
+        },
+        "dragging": false,
+        "id": "parser-7joVo",
+        "position": {
+          "x": 2967.782696393993,
+          "y": 13.341397249213415
         },
         "selected": false,
         "type": "genericNode"
       }
     ],
     "viewport": {
-      "x": -536.1006467639068,
-      "y": -1.5016717204414363,
-      "zoom": 0.5417221551762361
+      "x": -1204.1897227666248,
+      "y": 79.81877243945706,
+      "zoom": 0.48913277889819695
     }
   },
   "description": "generates code for OpenSafely",
