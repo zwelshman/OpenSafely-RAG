@@ -661,7 +661,7 @@
           "x": 1977.9097981422992,
           "y": 640.5656416923846
         },
-        "selected": false,
+        "selected": true,
         "type": "genericNode"
       },
       {
@@ -1251,7 +1251,7 @@
             ],
             "frozen": false,
             "icon": "AstraDB",
-            "last_updated": "2026-11-05T17:26:50.156Z",
+            "last_updated": "2026-11-05T18:47:57.378Z",
             "legacy": false,
             "lf_version": "1.13.0",
             "metadata": {
@@ -1632,7 +1632,8 @@
                   "graph3",
                   "hdrs3",
                   "opensafely",
-                  "opensafely2"
+                  "opensafely2",
+                  "opensafely_ast"
                 ],
                 "options_metadata": [
                   {
@@ -1669,6 +1670,12 @@
                     "icon": "NVIDIA",
                     "model": "NV-Embed-QA",
                     "provider": "nvidia",
+                    "records": 100
+                  },
+                  {
+                    "icon": "NVIDIA",
+                    "model": "NV-Embed-QA",
+                    "provider": "nvidia",
                     "records": 0
                   }
                 ],
@@ -1690,7 +1697,7 @@
                 "trace_as_metadata": true,
                 "track_in_telemetry": true,
                 "type": "str",
-                "value": "opensafely2"
+                "value": "opensafely_ast"
               },
               "content_field": {
                 "_input_type": "StrInput",
@@ -1827,7 +1834,7 @@
                     "api_endpoints": [
                       "https://02d3301d-8254-4659-bbee-60809dbdbe01-us-east-2.apps.astra.datastax.com"
                     ],
-                    "collections": 6,
+                    "collections": 7,
                     "keyspaces": [
                       "default_keyspace"
                     ],
@@ -1997,7 +2004,7 @@
                 "type": "other",
                 "value": ""
               },
-              "is_refresh": true,
+              "is_refresh": false,
               "keyspace": {
                 "_input_type": "DropdownInput",
                 "advanced": true,
@@ -2286,9 +2293,9 @@
       }
     ],
     "viewport": {
-      "x": -898.7378947187724,
-      "y": 400.9603587391325,
-      "zoom": 0.5187096723424917
+      "x": -111.03696893563904,
+      "y": 372.0932553333691,
+      "zoom": 0.37890430246952045
     }
   },
   "description": "Create, Connect, Converse.",
@@ -2297,6 +2304,6 @@
   "is_component": false,
   "last_tested_version": "1.13.0",
   "locked": false,
-  "name": "Opensafely RAG Server",
+  "name": "Opensafely RAG Server ast",
   "tags": []
 }
