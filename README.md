@@ -15,7 +15,6 @@ An open-source **Langflow workflow** that exposes a hosted Model Context Protoco
 
 * **Workflow Orchestration:** Langflow
 * **Data Ingestion:** GitExtractor
-* **LLM Gateway:** OpenRouter
 * **Vector Database:** AstraDB
 * **Hosting Platform:** Render
 
