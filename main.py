@@ -1,12 +1,10 @@
 import os
 import sys
-import asyncio
-from concurrent.futures import ThreadPoolExecutor
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
-from mcp.server.fastmcp import FastMCP, Context
+from mcp.server.fastmcp import FastMCP
 from mcp.server.transport_security import TransportSecuritySettings
 
 # Force line buffering so execution logs print instantly in cloud control panels
@@ -22,12 +20,11 @@ mcp = FastMCP(
     )
 )
 
-# Shared thread pool executor to safely run blocking Langflow sync calls off the main event loop
-executor = ThreadPoolExecutor(max_workers=4)
-
-def _execute_langflow_sync(question: str) -> str:
+# 2. Register MCP Tool
+@mcp.tool()
+def query_knowledge_base(question: str) -> str:
     """
-    Executes the heavy Langflow file inside a dedicated worker thread.
+    Search and retrieve answers from the Astra DB Vector Store RAG knowledge base using OpenRouter.
     """
     try:
         from langflow.load import run_flow_from_json
@@ -37,16 +34,15 @@ def _execute_langflow_sync(question: str) -> str:
 
         # Explicitly map Render system variables directly into the graph component configurations
         tweaks = {
-            "ext:openrouter:OpenRouterComponent@official-Lbbp3": {
-                "api_key": os.environ.get("OPENROUTER_API_KEY", ""),
-                "load_from_db": False  # <--- CRITICAL: Prevents Langflow from looking in a local DB
-            },
-            "ext:datastax:AstraDBVectorStoreComponent@official-zF58p": {
-                "token": os.environ.get("ASTRA_DB_APPLICATION_TOKEN", ""),
-                "api_endpoint": os.environ.get("ASTRA_DB_API_ENDPOINT", ""),
-                "load_from_db": False  # <--- CRITICAL: Forces it to use the token passed above
-            }
-        }
+    "ext:openrouter:OpenRouterComponent@official-Lbbp3": {
+        "api_key": os.environ.get("OPENROUTER_API_KEY", ""),
+        "load_from_db": False  # <--- CRITICAL: Prevents Langflow from looking in a local DB
+    },
+    "ext:datastax:AstraDBVectorStoreComponent@official-zF58p": {
+        "token": os.environ.get("ASTRA_DB_APPLICATION_TOKEN", ""),
+        "api_endpoint": os.environ.get("ASTRA_DB_API_ENDPOINT", ""),
+        "load_from_db": False  # <--- CRITICAL: Forces it to use the token passed above
+    }}
 
         print(f"INFO: Executing Langflow flow for question: {question}")
         result = run_flow_from_json(
@@ -69,37 +65,6 @@ def _execute_langflow_sync(question: str) -> str:
     except Exception as e:
         print(f"ERROR: Runtime execution failure: {e}", file=sys.stderr)
         return f"Error executing Langflow graph: {str(e)}"
-
-
-# 2. Register MCP Tool using Context injection to keep the SSE layer busy
-@mcp.tool()
-async def query_knowledge_base(question: str, ctx: Context) -> str:
-    """
-    Search and retrieve answers from the Astra DB Vector Store RAG knowledge base using OpenRouter.
-    """
-    loop = asyncio.get_running_loop()
-    
-    # 1. Dispatch the blocking Langflow task directly to our thread pool
-    langflow_task = loop.run_in_executor(executor, _execute_langflow_sync, question)
-    
-    # 2. Monitor the task while regularly sending MCP-compliant progress notifications.
-    # This ensures Render reads incoming frame data over the socket every 15 seconds, resetting the 60s timeout.
-    elapsed_seconds = 0
-    while not langflow_task.done():
-        await asyncio.sleep(15)
-        elapsed_seconds += 15
-        
-        # ctx.report_progress feeds formal progress tokens back through FastMCP's active SSE connection
-        await ctx.report_progress(
-            current=elapsed_seconds, 
-            total=120, 
-            unit="seconds elapsed (processing knowledge base)"
-        )
-        print(f"INFO: Keep-alive heartbeat sent to Render router. Elapsed processing time: {elapsed_seconds}s")
-
-    # 3. Task is ready, retrieve execution values natively
-    return await langflow_task
-
 
 # 3. Create standard FastAPI application
 app = FastAPI(
