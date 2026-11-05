@@ -105,6 +105,28 @@ def get_doc_section_content(topic: str, section_header: str = None) -> str:
     print(f"INFO: Fetching deep topic content for: {refined_query}")
     return query_knowledge_base(refined_query)
 
+# 1. Dynamically locate the actual absolute templates directory path on Render
+TEMPLATES_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "templates"))
+
+@mcp.resource("codebase://templates/{script_name}.py")
+def get_any_template(script_name: str) -> str:
+    """Fetches a specific reference script from the codebase templates directory."""
+    
+    # 2. Build the target path appending the script name cleanly
+    target_path = os.path.abspath(os.path.join(TEMPLATES_DIR, f"{script_name}.py"))
+    
+    # 3. Robust security check to prevent directory traversal (e.g., script_name = "../../../etc/passwd")
+    if not target_path.startswith(TEMPLATES_DIR + os.sep) and target_path != TEMPLATES_DIR:
+        return "Access denied: Invalid template location."
+        
+    # 4. Read and return the file
+    if os.path.exists(target_path):
+        with open(target_path, "r", encoding="utf-8") as f:
+            return f.read()
+            
+    return f"Template '{script_name}' not found."
+
+
 
 # 4. Create standard FastAPI application
 app = FastAPI(
