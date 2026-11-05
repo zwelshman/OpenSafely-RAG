@@ -7,7 +7,7 @@
 
 ⚠️ **Disclaimer:** This project is independent and not affiliated with the official OpenSafely project.
 
-An open-source Langflow workflow that exposes a hosted Model Context Protocol (MCP) server. It allows you to seamlessly integrate OpenSafely's `ehrql` documentation and workspace structure into your AI assistant of choice (such as Cursor, VS Code, or Claude Desktop).
+An open-source Langflow workflow that exposes a hosted Model Context Protocol (MCP) server. It allows you to seamlessly integrate OpenSafely's `ehrql` documentation directly into your AI assistant of choice (such as Cursor, VS Code, or Claude Desktop).
 
 ## 🛠️ Tech Stack
 *   **Workflow Orchestration:** Langflow
@@ -21,13 +21,11 @@ An open-source Langflow workflow that exposes a hosted Model Context Protocol (M
 
 ## 🚀 Supported MCP Tools
 
-Your AI assistant will automatically discover and use the following structural and search capabilities:
+Your AI assistant will automatically discover and utilize the following targeted vector-store capabilities:
 
-*   `query_knowledge_base(question)` – Search and retrieve conceptual answers from the Astra DB Vector Store RAG knowledge base.
-*   `search_file_names(query)` – Performs a rapid substring match over project paths to locate source files instantly.
-*   `get_file_content(file_path, start_line, end_line)` – Fetches the full or partitioned contents of any workspace file to restore missing context from a RAG chunk.
-*   `get_file_structure(file_path)` – Uses Python's Abstract Syntax Tree (AST) to map imports, classes, functions, and docstrings without raw code clutter.
-*   `locate_test_file(source_file_path)` – Automatically finds corresponding unit test suites to provide immediate implementation examples.
+*   `query_knowledge_base(question)` – Search and retrieve conceptual answers from the Astra DB Vector Store RAG knowledge base using natural language.
+*   `search_docs_by_filename(filename)` – Queries the vector knowledge base specifically for chunks belonging to a targeted filename or path (e.g., `ethnicity.md` or `how-to/ethnicity`). Use this when general queries fail to pull the full text content of a specific file.
+*   `get_doc_section_content(topic, section_header)` – Fetches a comprehensive block of documentation text from Astra DB for a specific topic (e.g., `ethnicity definition`) and optionally refines the context extraction via a structural header.
 
 ## ⚙️ Deployment & Integration
 
@@ -46,4 +44,4 @@ Add the following snippet to your MCP settings file (e.g., `mcpServers.json` or 
   }
 }
 ```
-*(Note: Depending on your client implementation, your AI assistant will intelligently choose between semantic RAG queries and live codebase exploration tools depending on what you ask).*
+*(Note: Depending on your client implementation, your AI assistant will intelligently switch between semantic question-answering and explicit file-path targeting tools depending on your prompt context).*
