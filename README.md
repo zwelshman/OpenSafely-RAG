@@ -2,7 +2,7 @@
 
 ⚠️ **Disclaimer:** This project is independent and *not affiliated* with the official OpenSafely project.
 
-[![Repository Stats](https://vercel.app)](https://github.com/zwelshman/OpenSafely-RAG)
+[![Pinned Repo Card](https://github-readme-stats.vercel.app/api/pin/?username=zwelshman&repo=OpenSafely-RAG&theme=dark)](https://github.com/zwelshman/OpenSafely-RAG)
 
 An open-source **Langflow workflow** that exposes a hosted Model Context Protocol (MCP) server. It allows you to seamlessly integrate OpenSafely's `ehrql` documentation into your AI assistant of choice (such as Cursor, VS Code, or Claude Desktop).
 
