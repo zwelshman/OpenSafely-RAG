@@ -1,8 +1,11 @@
 # OpenSafely-RAG
 
-⚠️ **Disclaimer:** This project is independent and *not affiliated* with the official OpenSafely project.
+[![Stars](https://img.shields.io/github/stars/zwelshman/OpenSafely-RAG?style=flat-square&logo=github&color=blue)](https://github.com/zwelshman/OpenSafely-RAG/stargazers)
+[![Forks](https://img.shields.io/github/forks/zwelshman/OpenSafely-RAG?style=flat-square&logo=git&color=orange)](https://github.com/zwelshman/OpenSafely-RAG/network/members)
+[![Issues](https://img.shields.io/github/issues/zwelshman/OpenSafely-RAG?style=flat-square&logo=issues&color=critical)](https://github.com/zwelshman/OpenSafely-RAG/issues)
+[![Repo Size](https://img.shields.io/github/repo-size/zwelshman/OpenSafely-RAG?style=flat-square&logo=codeforces&color=success)](https://github.com/zwelshman/OpenSafely-RAG)
 
-[![Pinned Repo Card](https://github-stats-extended.vercel.app/api/pin/?username=zwelshman&repo=OpenSafely-RAG&theme=dark)](https://github.com/zwelshman/OpenSafely-RAG)
+⚠️ **Disclaimer:** This project is independent and *not affiliated* with the official OpenSafely project.
 
 An open-source **Langflow workflow** that exposes a hosted Model Context Protocol (MCP) server. It allows you to seamlessly integrate OpenSafely's `ehrql` documentation into your AI assistant of choice (such as Cursor, VS Code, or Claude Desktop).
 
