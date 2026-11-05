@@ -145,6 +145,8 @@
         "targetHandle": "{œfieldNameœ:œlexical_termsœ,œidœ:œext:datastax:AstraDBVectorStoreComponent@official-zF58pœ,œinputTypesœ:[œMessageœ],œtypeœ:œqueryœ}"
       },
       {
+        "animated": false,
+        "className": "",
         "data": {
           "sourceHandle": {
             "dataType": "Prompt",
@@ -168,6 +170,7 @@
           }
         },
         "id": "xy-edge__Prompt-KZQCQ{œdataTypeœ:œPromptœ,œidœ:œPrompt-KZQCQœ,œnameœ:œpromptœ,œoutput_typesœ:[œMessageœ]}-ChatOutput-Xu65b{œfieldNameœ:œinput_valueœ,œidœ:œChatOutput-Xu65bœ,œinputTypesœ:[œDataœ,œJSONœ,œDataFrameœ,œTableœ,œMessageœ],œtypeœ:œstrœ}",
+        "selected": false,
         "source": "Prompt-KZQCQ",
         "sourceHandle": "{œdataTypeœ:œPromptœ,œidœ:œPrompt-KZQCQœ,œnameœ:œpromptœ,œoutput_typesœ:[œMessageœ]}",
         "target": "ChatOutput-Xu65b",
@@ -651,8 +654,8 @@
           "width": 320
         },
         "position": {
-          "x": 2062.917770636842,
-          "y": -303.3270024843906
+          "x": 1985.7756815851112,
+          "y": -689.0374477430443
         },
         "positionAbsolute": {
           "x": 1977.9097981422992,
@@ -933,8 +936,8 @@
           "width": 320
         },
         "position": {
-          "x": 2510.8517115543873,
-          "y": -221.87497419408152
+          "x": 2719.881888339722,
+          "y": -408.5090606095591
         },
         "positionAbsolute": {
           "x": 2734.385670401691,
@@ -1248,7 +1251,7 @@
             ],
             "frozen": false,
             "icon": "AstraDB",
-            "last_updated": "2026-11-05T11:20:24.647Z",
+            "last_updated": "2026-11-05T17:26:50.156Z",
             "legacy": false,
             "lf_version": "1.13.0",
             "metadata": {
@@ -1994,7 +1997,7 @@
                 "type": "other",
                 "value": ""
               },
-              "is_refresh": false,
+              "is_refresh": true,
               "keyspace": {
                 "_input_type": "DropdownInput",
                 "advanced": true,
@@ -2069,7 +2072,7 @@
                 "trace_as_metadata": true,
                 "track_in_telemetry": true,
                 "type": "int",
-                "value": 10
+                "value": 75
               },
               "reranker": {
                 "_input_type": "DropdownInput",
@@ -2275,17 +2278,17 @@
           "width": 320
         },
         "position": {
-          "x": 1112.3141729031054,
-          "y": -818.1729037437781
+          "x": 848.5379974358971,
+          "y": -898.4255609024334
         },
         "selected": false,
         "type": "genericNode"
       }
     ],
     "viewport": {
-      "x": -710.5695054340822,
-      "y": 340.40802939930484,
-      "zoom": 0.4018558530248216
+      "x": -898.7378947187724,
+      "y": 400.9603587391325,
+      "zoom": 0.5187096723424917
     }
   },
   "description": "Create, Connect, Converse.",
