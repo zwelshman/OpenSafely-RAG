@@ -6,6 +6,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 from mcp.server.fastmcp import FastMCP
 from mcp.server.transport_security import TransportSecuritySettings
+import ast
+import fnmatch
 
 # Force line buffering so execution logs print instantly in cloud control panels
 sys.stdout.reconfigure(line_buffering=True)
@@ -84,6 +86,132 @@ def query_knowledge_base(question: str) -> str:
         print(f"ERROR: Runtime execution failure: {e}", file=sys.stderr)
         return f"Error executing Langflow graph: {str(e)}"
 
+import ast
+import fnmatch
+
+# --- ADDITIONAL ONBOARDING & NAVIGATION TOOLS ---
+
+@mcp.tool()
+def search_file_names(query: str) -> str:
+    """ Performs a rapid substring match over all project file paths to locate files instantly by name. """
+    matches = []
+    # Common directories to skip to prevent noisy results
+    exclude_dirs = {'.git', '__pycache__', 'node_modules', '.venv', 'venv', 'env'}
+    
+    for root, dirs, files in os.walk("."):
+        # Modify dirs in-place to skip excluded directories
+        dirs[:] = [d for d in dirs if d not in exclude_dirs]
+        
+        for file in files:
+            full_path = os.path.relpath(os.path.join(root, file), ".")
+            if query.lower() in file.lower() or query.lower() in full_path.lower():
+                matches.append(full_path)
+                
+    if not matches:
+        return f"No files found matching: '{query}'"
+    return "\n".join(sorted(matches))
+
+
+@mcp.tool()
+def get_file_content(file_path: str, start_line: int = None, end_line: int = None) -> str:
+    """ Fetches the full or partitioned content of any file in the workspace. Useful when RAG returns a severed code snippet and you need the full context. Line numbers are 1-indexed. """
+    # Prevent basic directory traversal outside the workspace
+    clean_path = os.path.normpath(file_path).lstrip("/")
+    if clean_path.startswith("..") or os.isabs(file_path):
+        return "Error: Access denied. Paths must be relative to the workspace root."
+        
+    if not os.path.exists(clean_path):
+        return f"Error: File not found at path '{clean_path}'"
+        
+    try:
+        with open(clean_path, "r", encoding="utf-8", errors="replace") as f:
+            lines = f.readlines()
+            
+        if start_line is not None or end_line is not None:
+            start = max(0, (start_line or 1) - 1)
+            end = min(len(lines), end_line or len(lines))
+            partition = lines[start:end]
+            header = f"--- Showing lines {start+1} to {end} of {clean_path} ---\n"
+            return header + "".join(partition)
+            
+        return "".join(lines)
+    except Exception as e:
+        return f"Error reading file: {str(e)}"
+
+
+@mcp.tool()
+def get_file_structure(file_path: str) -> str:
+    """ Uses Python's Abstract Syntax Tree (AST) to parse a Python file, mapping all its top-level imports, classes, functions, and their docstrings without dumping raw implementation logic. """
+    clean_path = os.path.normpath(file_path).lstrip("/")
+    if not clean_path.endswith(".py"):
+        return "Error: This tool is optimized exclusively for parsing Python (.py) source files."
+        
+    if not os.path.exists(clean_path):
+        return f"Error: File not found at path '{clean_path}'"
+
+    try:
+        with open(clean_path, "r", encoding="utf-8") as f:
+            node = ast.parse(f.read(), filename=clean_path)
+            
+        structure = []
+        imports = []
+        
+        for item in node.body:
+            # Gather import connections
+            if isinstance(item, (ast.Import, ast.ImportFrom)):
+                imports.append(ast.unparse(item))
+            # Gather Classes
+            elif isinstance(item, ast.ClassDef):
+                doc = ast.get_docstring(item) or "No docstring provided."
+                structure.append(f"Class: {item.name}\n  Docstring: {doc}")
+                # Peek at inner methods
+                for sub_item in item.body:
+                    if isinstance(sub_item, ast.FunctionDef):
+                        method_doc = ast.get_docstring(sub_item) or "No docstring."
+                        structure.append(f"  └─ Method: {sub_item.name}() -> {method_doc}")
+            # Gather Functions
+            elif isinstance(item, ast.FunctionDef):
+                doc = ast.get_docstring(item) or "No docstring provided."
+                structure.append(f"Function: {item.name}()\n  Docstring: {doc}")
+
+        output = []
+        if imports:
+            output.append("=== IMPORTS ===\n" + "\n".join(imports))
+        if structure:
+            output.append("=== CODE STRUCTURE ===\n" + "\n\n".join(structure))
+            
+        return "\n\n".join(output) if output else "The file contains no class or function definitions."
+    except Exception as e:
+        return f"Error generating file blueprint: {str(e)}"
+
+
+@mcp.tool()
+def locate_test_file(source_file_path: str) -> str:
+    """ Automatically maps a target source file to its corresponding test suite file (e.g. searching 'app/auth.py' will look for 'tests/test_auth.py') to show developers implementation examples. """
+    filename = os.path.basename(source_file_path)
+    name_without_ext, ext = os.path.splitext(filename)
+    
+    # Common test patterns (prefix vs suffix configurations)
+    target_patterns = [
+        f"test_{name_without_ext}{ext}",
+        f"{name_without_ext}_test{ext}",
+        f"test_{filename}"
+    ]
+    
+    found_tests = []
+    for root, dirs, files in os.walk("."):
+        if 'node_modules' in root or '.venv' in root or '.git' in root:
+            continue
+        for file in files:
+            for pattern in target_patterns:
+                if fnmatch.fnmatch(file, pattern) or (query.lower() in file.lower() if 'test' in file.lower() else False):
+                    # Direct signature pattern match
+                    if file in target_patterns:
+                        found_tests.append(os.path.relpath(os.path.join(root, file), "."))
+
+    if not found_tests:
+        return f"Could not find an obvious test suite matching '{filename}'. Try using 'search_file_names' with a 'test' keyword query."
+    return "Matching test file(s) located:\n" + "\n".join(found_tests)
 
 # 3. Create standard FastAPI application
 app = FastAPI(
