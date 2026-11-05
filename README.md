@@ -23,7 +23,7 @@ An open-source **Langflow workflow** that exposes a hosted Model Context Protoco
 ## 📊 Data Pipeline
 
 1. **Source:** Documentation pulled directly from the [OpenSafely ehrql Repository](https://github.com/opensafely-core/ehrql).
-2. **Processing:** The documentation is chunked, embedded, and stored in an AstraDB vector database for highly relevant Retrieval-Augmented Generation (RAG).
+2. **Processing:** The documentation is AST- python chunked, embeddeded Nvdia EmbedQA, and stored in an AstraDB vector database for highly relevant Retrieval-Augmented Generation (RAG).
 
 ---
 
