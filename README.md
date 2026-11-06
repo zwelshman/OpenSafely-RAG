@@ -1,9 +1,9 @@
-# OpenSafely-RAG
+# OpenSafelyMCP
 
-[![Stars](https://img.shields.io/github/stars/zwelshman/OpenSafely-RAG?style=flat-square&logo=github&color=blue)](https://github.com/zwelshman/OpenSafely-RAG/stargazers)
-[![Forks](https://img.shields.io/github/forks/zwelshman/OpenSafely-RAG?style=flat-square&logo=git&color=orange)](https://github.com/zwelshman/OpenSafely-RAG/network/members)
-[![Issues](https://img.shields.io/github/issues/zwelshman/OpenSafely-RAG?style=flat-square&logo=issues&color=critical)](https://github.com/zwelshman/OpenSafely-RAG/issues)
-[![Repo Size](https://img.shields.io/github/repo-size/zwelshman/OpenSafely-RAG?style=flat-square&logo=codeforces&color=success)](https://github.com/zwelshman/OpenSafely-RAG)
+[![Stars](https://img.shields.io/github/stars/zwelshman/OpenSafelyMCP?style=flat-square&logo=github&color=blue)](https://github.com/zwelshman/OpenSafelyMCP/stargazers)
+[![Forks](https://img.shields.io/github/forks/zwelshman/OpenSafelyMCP?style=flat-square&logo=git&color=orange)](https://github.com/zwelshman/OpenSafelyMCP/network/members)
+[![Issues](https://img.shields.io/github/issues/zwelshman/OpenSafelyMCP?style=flat-square&logo=issues&color=critical)](https://github.com/zwelshman/OpenSafelyMCP/issues)
+[![Repo Size](https://img.shields.io/github/repo-size/zwelshman/OpenSafelyMCP?style=flat-square&logo=codeforces&color=success)](https://github.com/zwelshman/OpenSafelyMCP)
 
 ⚠️ **Disclaimer:** This project is independent and not affiliated with the official OpenSafely project.
 
@@ -29,7 +29,7 @@ Your AI assistant will automatically discover and utilize the following targeted
 
 ## ⚙️ Deployment & Integration
 
-*   **Hosted MCP Server (SSE Endpoint):** `https://opensafely-rag-1.onrender.com/mcp/sse`
+*   **Hosted MCP Server (SSE Endpoint):** `https://opensafelymcp.onrender.com/mcp/sse`
 
 ### VS Code / Cursor Configuration
 Add the following snippet to your MCP settings file (e.g., `mcpServers.json` or through your IDE settings panel) to connect your assistant:
@@ -37,9 +37,9 @@ Add the following snippet to your MCP settings file (e.g., `mcpServers.json` or 
 ```json
 {
   "mcpServers": {
-    "opensafely-rag": {
+    "OpenSafelyMCP": {
       "type": "http",
-      "url": "https://opensafely-rag-1.onrender.com/mcp/sse"
+      "url": "https://pensafelymcp.onrender.com/mcp/sse"
     }
   }
 }
