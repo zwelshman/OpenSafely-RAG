@@ -7,7 +7,7 @@
 
 ⚠️ **Disclaimer:** This project is independent and not affiliated with the official OpenSafely project.
 
-An open-source Langflow workflow that exposes a hosted Model Context Protocol (MCP) server pulled directly from the `OpenSafely ehrql` Repository.. It allows you to seamlessly integrate OpenSafely's `ehrql` documentation directly into your AI assistant of choice (such as Cursor, VS Code, or Claude Desktop).
+An open-source Langflow workflow that exposes a hosted Model Context Protocol (MCP) server pulled directly from the `OpenSafely ehrql` Repository.. It allows you to seamlessly integrate OpenSafely's `ehrql` repository directly into your AI assistant of choice (such as Cursor, VS Code, or Claude Desktop).
 
 ## 🛠️ Tech Stack
 *   **Workflow Orchestration:** Langflow
